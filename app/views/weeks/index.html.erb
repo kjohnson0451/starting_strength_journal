@@ -14,8 +14,18 @@
     <tr>
       <td><%= "Week " + week.id.to_s %></td>
       <td><%= link_to 'Destroy', week, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% if false %>
-      <td><%= link_to 'Edit', edit_week_path(week) %></td>
+
+    <tr>
+      <% week.days.each do |day| %>
+      <td>
+        <table>
+          <% day.exercises.each do |exercise| %>
+          <tr>
+            <td><%= exercise[:description] %></td>
+          </tr>
+          <% end %>
+        </table>
+      </td>
       <% end %>
     </tr>
     <% end %>
