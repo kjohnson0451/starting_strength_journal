@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Weeks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @weeks.each do |week| %>
+    <tr>
+      <td><%= "Week " + week.id.to_s %></td>
+      <td><%= link_to 'Destroy', week, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% if false %>
+      <td><%= link_to 'Edit', edit_week_path(week) %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<%= link_to 'New Week', create_week_path, method: :post %>

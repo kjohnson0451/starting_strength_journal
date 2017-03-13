@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # WEEKS RESOURCES
+  get 'weeks', to: 'weeks#index'
+  post 'create_week', to: 'weeks#create', path: 'weeks/create'
+  delete 'week', to: 'weeks#destroy', path: 'weeks/:id'
+
 end
