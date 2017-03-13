@@ -16,13 +16,19 @@ ActiveRecord::Schema.define(version: 20170308212720) do
   enable_extension "plpgsql"
 
   create_table "days", force: :cascade do |t|
+    t.integer  "week_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["week_id"], name: "index_days_on_week_id", using: :btree
   end
 
   create_table "exercises", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "day_id"
+    t.string   "description"
+    t.integer  "load"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["day_id"], name: "index_exercises_on_day_id", using: :btree
   end
 
   create_table "weeks", force: :cascade do |t|

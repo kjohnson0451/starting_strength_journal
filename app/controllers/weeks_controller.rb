@@ -1,18 +1,20 @@
 class WeeksController < ApplicationController
-  before_action :set_week, only: [:show, :edit, :update, :destroy]
+  #before_action :set_week, only: [:show, :edit, :update, :destroy]
 
+  SQUAT_DESCRIPTION = "3x5 Squat"
+  PRESS_DESCRIPTION = "3x5 Press"
+  BENCH_DESCRIPTION = "3x5 Bench"
+  DEADLIFT_DESCRIPTION = "1x5 Deadlift"
 
   def index
     @weeks = Week.all
-
-    if @weeks.count == 0
-      @week = Week.new
-      @week.save
-    end
   end
 
   def create
     @week = Week.new
+
+    @week.days << create_press_day << create_bench_day << create_press_day
+
     @week.save
     redirect_to weeks_path
   end
@@ -25,11 +27,34 @@ class WeeksController < ApplicationController
   end
 
   private
-    def set_week
-      @week = Week.find(params[:id])
-    end
+    #def set_week
+    #  @week = Week.find(params[:id])
+    #end
 
     def week_params
       params.fetch(:week, {})
+    end
+
+    def create_press_day
+
+      exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
+      exercise2 = Exercise.new(:description => PRESS_DESCRIPTION)
+      exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
+
+      day = Day.new
+      day.exercises << exercise1 << exercise2 << exercise3
+
+      return day
+    end
+
+    def create_bench_day
+      exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
+      exercise2 = Exercise.new(:description => BENCH_DESCRIPTION)
+      exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
+
+      day = Day.new
+      day.exercises << exercise1 << exercise2 << exercise3
+
+      return day
     end
 end
