@@ -23,6 +23,16 @@
           <tr>
             <td><%= exercise[:description] %></td>
           </tr>
+          <tr>
+            <td>
+              <%= form_for exercise do |f| %>
+              <%= f.label :load %>
+              <%= f.number_field :load %>
+              <br><br>
+              <%= f.submit %>
+            </td>
+            <% end %>
+          </tr>
           <% end %>
         </table>
       </td>
