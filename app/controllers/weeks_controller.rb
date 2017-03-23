@@ -6,24 +6,23 @@ class WeeksController < ApplicationController
   BENCH_DESCRIPTION = "3x5 Bench"
   DEADLIFT_DESCRIPTION = "1x5 Deadlift"
 
-  def index
-    @weeks = Week.all
-  end
-
   def create
-    @week = Week.new
+    week = Week.new
 
-    @week.days << create_press_day << create_bench_day << create_press_day
+    week.days << create_press_day << create_bench_day << create_press_day
 
-    @week.save
-    redirect_to weeks_path
+    routine = Routine.find(1)
+    routine.weeks << week
+    routine.save
+
+    redirect_to root_path
   end
 
   def destroy
     @week = Week.find(params[:id])
     @week.destroy
 
-    redirect_to weeks_path
+    redirect_to root_path
   end
 
   private

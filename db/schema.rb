@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308212720) do
+ActiveRecord::Schema.define(version: 20170322205530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,9 +31,16 @@ ActiveRecord::Schema.define(version: 20170308212720) do
     t.index ["day_id"], name: "index_exercises_on_day_id", using: :btree
   end
 
-  create_table "weeks", force: :cascade do |t|
+  create_table "routines", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "weeks", force: :cascade do |t|
+    t.integer  "routine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["routine_id"], name: "index_weeks_on_routine_id", using: :btree
   end
 
 end
