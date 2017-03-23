@@ -26,14 +26,6 @@ class WeeksController < ApplicationController
   end
 
   private
-    #def set_week
-    #  @week = Week.find(params[:id])
-    #end
-
-    def week_params
-      params.fetch(:week, {})
-    end
-
     def create_press_day
 
       exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
