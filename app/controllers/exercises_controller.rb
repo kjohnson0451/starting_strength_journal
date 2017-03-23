@@ -1,8 +1,8 @@
 class ExercisesController < ApplicationController
 
   def update
-    @exercise = Exercise.find(params[:id])
-    @exercise.update(exercise_params)
+    exercise = Exercise.find(params[:id])
+    exercise.update(exercise_params)
 
     redirect_to root_path
   end
