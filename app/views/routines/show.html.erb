@@ -10,37 +10,33 @@
   </thead>
 
   <tbody>
-    <% @routine.weeks.each do |week| %>
-    <tr>
-      <td><%= "Week " + week.id.to_s %></td>
-      <td><%= link_to 'Destroy', week, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-    <tr>
-      <% week.days.each do |day| %>
-      <td>
-        <table>
-          <% day.exercises.each do |exercise| %>
-          <tr>
-            <td><%= exercise[:description] %></td>
-          </tr>
-          <tr>
-            <td>
-              <%= form_for exercise do |f| %>
-              <%= f.label :load %>
-              <%= f.number_field :load %>
-              <br><br>
-              <%= f.submit %>
-            </td>
-            <% end %>
-          </tr>
+    <%= form_for @routine do |f| %>
+      <% @routine.weeks.each do |week| %>
+      <tr>
+        <td><%= "Week " + week.id.to_s %></td>
+        <td><%= link_to 'Destroy', week, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <tr>
+          <% week.days.each do |day| %>
+          <td>
+            <table>
+              <%= f.fields_for :exercises do |exercises_form| %>
+                <% if day.exercises.include? exercises_form.object %>
+                  <tr>
+                    <td><%= exercises_form.object[:description] %></td>
+                  </tr>
+                  <tr>
+                    <td><%= exercises_form.number_field :load %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </table>
+          </td>
           <% end %>
-        </table>
-      </td>
+        </tr>
       <% end %>
-    </tr>
+      <tr><td><%= f.submit %></td></tr>
     <% end %>
   </tbody>
 </table>
-<br>
 
 <%= link_to 'New Week', create_week_path, method: :post %>

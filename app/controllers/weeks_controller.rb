@@ -33,7 +33,7 @@ class WeeksController < ApplicationController
       exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
 
       day = Day.new
-      day.exercises << exercise1 << exercise2 << exercise3
+      day.exercises << exercise3 << exercise2 << exercise1
 
       return day
     end
@@ -44,7 +44,7 @@ class WeeksController < ApplicationController
       exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
 
       day = Day.new
-      day.exercises << exercise1 << exercise2 << exercise3
+      day.exercises << exercise3 << exercise2 << exercise1
 
       return day
     end
