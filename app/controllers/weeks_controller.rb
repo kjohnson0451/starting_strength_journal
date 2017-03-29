@@ -12,14 +12,17 @@ class WeeksController < ApplicationController
     week.days << create_press_day << create_bench_day << create_press_day
 
     routine = Routine.find(1)
-    routine.weeks << week
+    routine.weeks.append(week)
     routine.save
 
     redirect_to root_path
   end
 
   def destroy
+    routine = Routine.find(1)
     week = Week.find(params[:id])
+
+    routine.weeks.last.destroy until routine.weeks.last == week
     week.destroy
 
     redirect_to root_path

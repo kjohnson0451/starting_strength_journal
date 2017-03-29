@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170322205530) do
 
   create_table "weeks", force: :cascade do |t|
     t.integer  "routine_id"
+    t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["routine_id"], name: "index_weeks_on_routine_id", using: :btree

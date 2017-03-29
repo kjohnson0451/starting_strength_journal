@@ -13,7 +13,7 @@
     <%= form_for @routine do |f| %>
       <% @routine.weeks.each do |week| %>
       <tr>
-        <td><%= "Week " + week.id.to_s %></td>
+        <td><%= "Week " + week.position.to_s %></td>
         <td><%= link_to 'Destroy', week, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <tr>
           <% week.days.each do |day| %>
