@@ -34,7 +34,9 @@
           <% end %>
         </tr>
       <% end %>
+      <% if @routine.weeks.any? %>
       <tr><td><%= f.submit %></td></tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
