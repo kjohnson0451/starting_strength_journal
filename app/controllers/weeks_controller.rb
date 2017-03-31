@@ -9,7 +9,7 @@ class WeeksController < ApplicationController
   def create
     week = Week.new
 
-    week.days << create_press_day << create_bench_day << create_press_day
+    week.days << create_press_day("Monday") << create_bench_day("Wednesday") << create_press_day("Friday")
 
     routine = Routine.find(1)
     routine.weeks.append(week)
@@ -25,17 +25,21 @@ class WeeksController < ApplicationController
     routine.weeks.last.destroy until routine.weeks.last == week
     week.destroy
 
-    redirect_to root_path
+    if routine.weeks.any?
+      redirect_to root_path
+    else
+      create
+    end
   end
 
   private
-    def create_press_day
+    def create_press_day(day_name)
 
       exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
       exercise2 = Exercise.new(:description => PRESS_DESCRIPTION)
       exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
 
-      day = Day.new
+      day = Day.new(:name => day_name)
       day.exercises.append(exercise1)
       day.exercises.append(exercise2)
       day.exercises.append(exercise3)
@@ -43,12 +47,12 @@ class WeeksController < ApplicationController
       return day
     end
 
-    def create_bench_day
+    def create_bench_day(day_name)
       exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
       exercise2 = Exercise.new(:description => BENCH_DESCRIPTION)
       exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
 
-      day = Day.new
+      day = Day.new(:name => day_name)
       day.exercises.append(exercise1)
       day.exercises.append(exercise2)
       day.exercises.append(exercise3)

@@ -3,22 +3,17 @@
 <h1>Starting Strength Journal</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
     <%= form_for @routine do |f| %>
       <% @routine.weeks.each do |week| %>
       <tr>
-        <td><%= "Week " + week.position.to_s %></td>
+        <td><h4><%= "Week " + week.position.to_s %></h4></td>
         <td><%= link_to 'Destroy', week, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <tr>
           <% week.days.each do |day| %>
           <td>
             <table>
+              <tr><th><%= day[:name] %></th></tr>
               <%= f.fields_for :exercises do |exercises_form| %>
                 <% if day.exercises.include? exercises_form.object %>
                   <tr>

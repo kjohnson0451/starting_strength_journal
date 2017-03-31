@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20170322205530) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "week_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["week_id"], name: "index_days_on_week_id", using: :btree
