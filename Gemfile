@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Bootstrap (CSS Library)
+gem 'bootstrap-sass', '~> 3.3.7'
+
 # Treat the Weeks of a Routine as a list
 gem 'acts_as_list', '~> 0.9.4'
 
