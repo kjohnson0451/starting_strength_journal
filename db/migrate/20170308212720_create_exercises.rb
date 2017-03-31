@@ -5,6 +5,7 @@ class CreateExercises < ActiveRecord::Migration[5.0]
 
       t.string :description
       t.integer :load, optional: true
+      t.integer :position
 
       t.timestamps
     end
