@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Weeks</h1>
+<h1>Starting Strength Journal</h1>
 
 <table>
   <thead>
@@ -35,7 +35,7 @@
         </tr>
       <% end %>
       <% if @routine.weeks.any? %>
-      <tr><td><%= f.submit %></td></tr>
+      <tr><td><%= f.submit "Save Records"%></td></tr>
       <% end %>
     <% end %>
   </tbody>
