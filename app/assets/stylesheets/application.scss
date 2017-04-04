@@ -18,11 +18,12 @@
 body,html {
     background-color: grey;
     height:100%;
+    text-align: center;
 }
 
 div.main {
-    margin: auto;
-    width: 768px;
+    display: inline-block;
+    text-align: left;
     min-height:100%;
     padding: 10px;
     background-color: white;
