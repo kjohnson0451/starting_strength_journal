@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   # ROUTINE RESOURCES
   get '/routine/', to: 'routines#show', as: 'routine'
   patch '/routine/', to: 'routines#update'

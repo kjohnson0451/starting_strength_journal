@@ -41,6 +41,9 @@ gem 'bootstrap-sass', '~> 3.3.7'
 # Treat the Weeks of a Routine as a list
 gem 'acts_as_list', '~> 0.9.4'
 
+# User Authentication
+gem 'devise', '~> 4.2.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

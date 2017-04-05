@@ -1,5 +1,5 @@
 class WeeksController < ApplicationController
-  #before_action :set_week, only: [:show, :edit, :update, :destroy]
+  before_action :set_routine, only: [:create, :destroy]
 
   SQUAT_DESCRIPTION = "3x5 Squat"
   PRESS_DESCRIPTION = "3x5 Press"
@@ -11,21 +11,19 @@ class WeeksController < ApplicationController
 
     week.days << create_press_day("Monday") << create_bench_day("Wednesday") << create_press_day("Friday")
 
-    routine = Routine.find(1)
-    routine.weeks.append(week)
-    routine.save
+    @routine.weeks.append(week)
+    @routine.save
 
     redirect_to root_path
   end
 
   def destroy
-    routine = Routine.find(1)
     week = Week.find(params[:id])
 
-    routine.weeks.last.destroy until routine.weeks.last == week
+    @routine.weeks.last.destroy until @routine.weeks.last == week
     week.destroy
 
-    if routine.weeks.any?
+    if @routine.weeks.any?
       redirect_to root_path
     else
       create
@@ -33,30 +31,38 @@ class WeeksController < ApplicationController
   end
 
   private
-    def create_press_day(day_name)
-
-      exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
-      exercise2 = Exercise.new(:description => PRESS_DESCRIPTION)
-      exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
-
-      day = Day.new(:name => day_name)
-      day.exercises.append(exercise1)
-      day.exercises.append(exercise2)
-      day.exercises.append(exercise3)
-
-      return day
+  def set_routine
+    if user_signed_in?
+      @routine = current_user.routine
+    else
+      @routine = Routine.find(1)
     end
+  end
 
-    def create_bench_day(day_name)
-      exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
-      exercise2 = Exercise.new(:description => BENCH_DESCRIPTION)
-      exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
+  def create_press_day(day_name)
 
-      day = Day.new(:name => day_name)
-      day.exercises.append(exercise1)
-      day.exercises.append(exercise2)
-      day.exercises.append(exercise3)
+    exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
+    exercise2 = Exercise.new(:description => PRESS_DESCRIPTION)
+    exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
 
-      return day
-    end
+    day = Day.new(:name => day_name)
+    day.exercises.append(exercise1)
+    day.exercises.append(exercise2)
+    day.exercises.append(exercise3)
+
+    return day
+  end
+
+  def create_bench_day(day_name)
+    exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
+    exercise2 = Exercise.new(:description => BENCH_DESCRIPTION)
+    exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
+
+    day = Day.new(:name => day_name)
+    day.exercises.append(exercise1)
+    day.exercises.append(exercise2)
+    day.exercises.append(exercise3)
+
+    return day
+  end
 end
