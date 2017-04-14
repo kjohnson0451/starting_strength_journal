@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-routine = Routine.create()
+routine = Routine.create(last_day_type: DAY_TYPE_PRESS)
 
 week = Week.create(position: 1, routine: routine)
 

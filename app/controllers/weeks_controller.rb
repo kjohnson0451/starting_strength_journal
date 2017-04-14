@@ -7,11 +7,15 @@ class WeeksController < ApplicationController
   DEADLIFT_DESCRIPTION = "1x5 Deadlift"
 
   def create
-    week = Week.new
+    m_exercise_day_service = ExerciseDayService.new
+    @routine.weeks.append(m_exercise_day_service.create_exercise_week(@routine[:last_day_type]))
 
-    week.days << create_press_day("Monday") << create_bench_day("Wednesday") << create_press_day("Friday")
-
-    @routine.weeks.append(week)
+    case @routine[:last_day_type]
+    when DAY_TYPE_BENCH
+      @routine[:last_day_type] = DAY_TYPE_PRESS
+    when DAY_TYPE_PRESS
+      @routine[:last_day_type] = DAY_TYPE_BENCH
+    end
     @routine.save
 
     redirect_to root_path
@@ -39,30 +43,4 @@ class WeeksController < ApplicationController
     end
   end
 
-  def create_press_day(day_name)
-
-    exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
-    exercise2 = Exercise.new(:description => PRESS_DESCRIPTION)
-    exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
-
-    day = Day.new(:name => day_name)
-    day.exercises.append(exercise1)
-    day.exercises.append(exercise2)
-    day.exercises.append(exercise3)
-
-    return day
-  end
-
-  def create_bench_day(day_name)
-    exercise1 = Exercise.new(:description => SQUAT_DESCRIPTION)
-    exercise2 = Exercise.new(:description => BENCH_DESCRIPTION)
-    exercise3 = Exercise.new(:description => DEADLIFT_DESCRIPTION)
-
-    day = Day.new(:name => day_name)
-    day.exercises.append(exercise1)
-    day.exercises.append(exercise2)
-    day.exercises.append(exercise3)
-
-    return day
-  end
 end
