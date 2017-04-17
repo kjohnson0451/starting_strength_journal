@@ -42,4 +42,9 @@
   </tbody>
 </table>
 
+<%= form_for @routine, html: { id: "change_routine_phase"} do |f| %>
+  <%= f.select :phase, [["Press & Bench", PHASE_PRESS_BENCH], ["Power Clean", PHASE_POWER_CLEAN]], {}, { onchange: "$('#change_routine_phase').submit();" } %>
+<% end %>
+
+
 <%= link_to 'New Week', create_week_path, method: :post %>

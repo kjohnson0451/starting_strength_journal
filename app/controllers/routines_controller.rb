@@ -20,6 +20,6 @@ class RoutinesController < ApplicationController
   end
 
   def routine_params
-    params.require(:routine).permit(exercises_attributes: [:id, :load])
+    params.require(:routine).permit(:phase, exercises_attributes: [:id, :load])
   end
 end
