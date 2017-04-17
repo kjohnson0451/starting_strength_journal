@@ -8,14 +8,15 @@ class WeeksController < ApplicationController
 
   def create
     m_exercise_day_service = ExerciseDayService.new
-    @routine.weeks.append(m_exercise_day_service.create_exercise_week(@routine[:last_day_type]))
 
-    case @routine[:last_day_type]
-    when DAY_TYPE_BENCH
-      @routine[:last_day_type] = DAY_TYPE_PRESS
-    when DAY_TYPE_PRESS
-      @routine[:last_day_type] = DAY_TYPE_BENCH
+    last_day_type = DAY_TYPE_B
+
+    if @routine.weeks.any?
+      last_day_type = @routine.weeks.last.days.last[:day_type]
     end
+
+    @routine.weeks.append(m_exercise_day_service.create_exercise_week(@routine[:phase], last_day_type))
+
     @routine.save
 
     redirect_to root_path

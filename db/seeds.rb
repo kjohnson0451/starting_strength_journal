@@ -6,11 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-routine = Routine.create(last_day_type: DAY_TYPE_PRESS)
+routine = Routine.create()
 
 week = Week.create(position: 1, routine: routine)
 
-days = Day.create([{week: week, name: "Monday"}, {week: week, name: "Wednesday"}, {week: week, name: "Friday"}])
+days = Day.create([{week: week, name: "Monday", day_type: DAY_TYPE_A}, {week: week, name: "Wednesday", day_type: DAY_TYPE_B}, {week: week, name: "Friday", day_type: DAY_TYPE_A}])
 
 Exercise.create(day: days[0], position: 1, description: "3x5 Squat")
 Exercise.create(day: days[0], position: 2, description: "3x5 Press")
